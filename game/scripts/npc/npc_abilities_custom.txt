@@ -18,20 +18,26 @@
 			"FightRecapLevel"				"1"
 			"AbilityTextureName"			"spirit_breaker_charge_of_darkness"
 
+			"AbilityType"           		"DOTA_ABILITY_TYPE_BASIC"
+    		"MaxLevel"            		   	"1"
+    		"RequiredLevel"       		   	"1"
+
 			// Casting
 			//-------------------------------------------------------------------------------------------------------------
-			"AbilityCastRange"				"350 450 550 650"
-			"AbilityCastPoint"				"0.0 0.0 0.0 0.0"
+			"AbilityCastRange"				"600"
+			"AbilityCastPoint"				"0.0"
 			
 			// Time		
 			//-------------------------------------------------------------------------------------------------------------
-			"AbilityCooldown"				"11.0 11.0 11.0 11.0"
+			"AbilityCooldown"				"11.0"
 
 			// Cost
 			//-------------------------------------------------------------------------------------------------------------
-			"AbilityManaCost"				"110 120 130 140"
+			"AbilityManaCost"				"0"
 			
-			"AbilityDamage"					"100 160 220 280"
+			// Stats
+    		//------------------------------------------------------------------------------------------------------------
+			"AbilityDamage"					"300"
 			
 			// Special
 			//-------------------------------------------------------------------------------------------------------------
@@ -40,27 +46,27 @@
 				"01"
 				{
 					"var_type"			"FIELD_INTEGER"
-					"burrow_width"		"150"
+					"width"				"150"
 				}
 				"02"
 				{
 					"var_type"			"FIELD_FLOAT"
-					"burrow_duration"	"2.17"
+					"duration"			"2.17"
 				}
 				"03"
 				{
 					"var_type"			"FIELD_FLOAT"
-					"burrow_anim_time"	"0.52"
+					"anim_time"			"0.52"
 				}
 				"04"
 				{
 					"var_type"			"FIELD_INTEGER"
-					"tooltip_range"		"350 450 550 650"
+					"tooltip_range"		"600"
 				}
 				"05"
 				{
-					"var_type"				"FIELD_INTEGER"
-					"speed"					"3000"
+					"var_type"			"FIELD_INTEGER"
+					"speed"				"1500"
 				}
 			}
 			
@@ -71,7 +77,6 @@
 				"soundfile"				"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
 				"particle"				"particles/generic_gameplay/generic_stunned.vpcf"
 				"particle"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_dust.vpcf"
-				"particle"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_wave.vpcf"
 			}
 			
 			"OnSpellStart"
@@ -79,8 +84,8 @@
 				"LinearProjectile"
 				{
 					"MoveSpeed"					"%speed"
-					"StartRadius"				"%burrow_width"
-					"EndRadius"					"%burrow_width"
+					"StartRadius"				"%width"
+					"EndRadius"					"%width"
 					"TargetTeams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
 					"TargetTypes"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 					"HasFrontalCone"			"0"
@@ -97,6 +102,13 @@
 					"EffectName"				"Hero_Sven.WarCry"
 					"Target"					"CASTER"
 				}
+
+				"RunScript"
+				{
+					"ScriptFile"		"scripts/vscripts/heroes.lua"
+					"Function"			"bullrush"
+					"Target"			"POINT"
+				}
 			}
 			
 			"OnProjectileHitUnit"
@@ -112,14 +124,14 @@
 				"Knockback"
 				{
 					"Target"			"TARGET"
-					"Duration"			"%burrow_anim_time"
+					"Duration"			"%anim_time"
 					"Distance"			"0"
 					"Height"			"500"
 				}
 				
 				"DelayedAction"
 				{
-					"Delay"						"%burrow_anim_time"
+					"Delay"						"%anim_time"
 					"Action"
 					{
 						"Damage"
@@ -133,14 +145,7 @@
 			}
 			
 			"OnProjectileFinish"
-			{
-				"RunScript"
-				{
-					"ScriptFile"		"scripts/vscripts/heroes.lua"
-					"Function"			"bullrush"
-					"Target"			"POINT"
-				}
-				
+			{				
 				"RemoveModifier"
 				{
 					"ModifierName"		"modifier_bull_rush"
@@ -167,12 +172,6 @@
 							"EffectAttachType"			"follow_origin"
 							"Target"					"TARGET"
 						}					
-					//	"AttachEffect"
-				//		{
-				//			"EffectName"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_wave.vpcf"
-				//			"EffectAttachType"			"follow_origin"
-				//			"Target"					"TARGET"
-				//		}
 					}
 
 				}
@@ -180,7 +179,7 @@
 				"modifier_bull_rush_stun"
 				{
 					"IsDebuff"					"1"
-					"Duration"					"%burrow_duration"
+					"Duration"					"%duration"
 					"OverrideAnimation"			"ACT_DOTA_DISABLED"
 					
 					"EffectName"				"particles/generic_gameplay/generic_stunned.vpcf"
@@ -200,7 +199,7 @@
   
 	"advanced_dummy_unit"
 	{
-		"AbilityBehavior" 		"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityBehavior" 				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"BaseClass" 					"ability_datadriven"
 		"AbilityTextureName"            "rubick_empty1"
 		"MaxLevel"                      "1"
