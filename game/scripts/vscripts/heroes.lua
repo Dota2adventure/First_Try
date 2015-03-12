@@ -4,9 +4,10 @@ function GameMode:OnHeroInGame(hero)
 	if hero:GetUnitName() == "npc_dota_hero_fighter" then
 		-- These lines will create an item and add it to the player, effectively ensuring they start with the item
 		local item = CreateItem("item_chainmail", hero, hero)
+		local item2 = CreateItem("item_broadsword", hero, hero)
+		
 		hero:AddItem(item)
-		item = CreateItem("item_broadsword", hero, hero)
-		hero:AddItem(item) 
+		hero:AddItem(item2) 
 	return end
 
 	-- Level the first ability
@@ -46,5 +47,27 @@ function bullrush( keys )
 		end
 
 	end)
+
+end
+
+function StrToDamage( keys )
+
+	local ability = keys.ability
+	local caster = keys.caster
+	local target = keys.target
+	local str_caster = caster:GetStrength()
+	local str_damage = ability:GetLevelSpecialValueFor("str_damage", (ability:GetLevel() -1)) 
+	
+
+	local damage_table = {}
+
+	damage_table.attacker = caster
+	damage_table.damage_type = ability:GetAbilityDamageType()
+	damage_table.ability = ability
+	damage_table.victim = target
+
+	damage_table.damage = str_caster * str_damage
+
+	ApplyDamage(damage_table)
 
 end
