@@ -10,7 +10,7 @@ function GameMode:OnHeroInGame(hero)
 		hero:AddItem(item)
 		hero:AddItem(item2) 
 		print('Items added')
-	return end
+	end
 
 	-- Level the first ability
 	-- hero:GetAbilityByIndex(0):SetLevel(1)
@@ -71,5 +71,30 @@ function StrToDamage( keys )
 	damage_table.damage = str_caster * str_damage
 
 	ApplyDamage(damage_table)
+
+end
+
+function UpgradeAbility(hero,ability)
+	
+	if path1+path2 > 4 then
+		print("ERROR: Max lvl 5 per ability")
+		return 
+	end
+
+	-- Need table with oriname, path1, path2
+
+	-- Old name
+	local ability_old_name = ability:GetAbilityName() 
+
+	-- Set new names
+	local ability_new_name = oriname..path1..path2
+
+	-- Add, Swap, Find Handle, Set Level and Remove the old ability
+	hero:AddAbility(ability_new_name)
+	hero:SwapAbilities(ability_old_name, ability_new_name, false, true)
+	local new_ability_handle = hero:FindAbilityByName(ability_new_name)
+	new_ability_handle:SetLevel(1)
+	print("Upgraded "..ability_old_name.." to "..ability_new_name)
+	hero:RemoveAbility(ability_old_name)
 
 end
