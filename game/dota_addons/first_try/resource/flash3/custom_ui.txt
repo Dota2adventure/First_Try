@@ -1,10 +1,10 @@
 "CustomUI"
 {
-    "1"
-    {
-        "File"      "CustomUI"
-        "Depth"     "51"
-    }
+    //"1"
+    //{
+    //    "File"      "CustomUI"
+    //    "Depth"     "51"
+    //}
 }
 // =============================================
 // Depths of base Dota UI elements

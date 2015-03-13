@@ -86,7 +86,7 @@
 		"BaseClass" 					"ability_datadriven"
 		"AbilityTextureName"            "rubick_empty1"
 	}
-	"Bull_Rush44"
+	"Bull_Rush"
 		{
 			// General
 			//-------------------------------------------------------------------------------------------------------------
@@ -100,8 +100,9 @@
 			"AbilityTextureName"			"spirit_breaker_charge_of_darkness"
 	
 			"AbilityType"           		"DOTA_ABILITY_TYPE_BASIC"
-	    		"MaxLevel"            		   	"1"
-	    		"RequiredLevel"       		   	"1"
+	    	"MaxLevel"            		   	"8"
+	    	"RequiredLevel"       		   	"1"
+	    	"LevelsBetweenUpgrades"  		"2"
 	
 			// Casting
 			//-------------------------------------------------------------------------------------------------------------
@@ -110,7 +111,7 @@
 			
 			// Time		
 			//-------------------------------------------------------------------------------------------------------------
-			"AbilityCooldown"				"5.0"			// Reduced from 11.0 - x,4 
+			"AbilityCooldown"				"11.0"
 	
 			// Cost
 			//-------------------------------------------------------------------------------------------------------------
@@ -123,12 +124,12 @@
 				"01"
 				{
 					"var_type"			"FIELD_INTEGER"
-					"width"				"400"				// Upgraded width from 150 - 2,x
+					"width"				"150 150 150 150 400 400 400 400"				// 5
 				}
 				"02"
 				{
 					"var_type"			"FIELD_FLOAT"
-					"stun_duration"		"2.5"					// Upgraded from 0 - x,3
+					"stun_duration"		"0 0 0 0 0 3.5 3.5 3.5"					// 6
 				}
 				"03"
 				{
@@ -138,7 +139,7 @@
 				"04"
 				{
 					"var_type"			"FIELD_INTEGER"
-					"tooltip_range"		"1200"				// Upgraded range from 600 - 1,x
+					"tooltip_range"		"600 1200 1200 1200 1200 1200 1200 1200"				// 2
 				}
 				"05"
 				{
@@ -148,7 +149,7 @@
 				"06"
 				{
 					"var_type"			"FIELD_FLOAT"
-					"buff_duration"		"2.0"				// Upgraded from 0 - 4,x
+					"buff_duration"		"0 0 0 0 0 0 0 3.0"				// 8
 				}
 				"07"
 				{
@@ -158,27 +159,27 @@
 				"08"
 				{
 					"var_type"			"FIELD_INTEGER"
-					"slow_debuff_speed"	"-40"
+					"slow_debuff_speed"	"0 0 -40 -40 -40 -40 -40 -40"	// 3
 				}
 				"09"
 				{
 					"var_type"					"FIELD_FLOAT"
-					"slow_buff_duration"		"9.0"				// Upgraded from 0 - x,1
+					"slow_buff_duration"		"6.0"				
 				}
 				"10"
 				{
 					"var_type"					"FIELD_FLOAT"
-					"str_damage"				"3.0"				// Upgraded from 0 - 3,x
+					"str_damage"				"0 0 0 0 0 0 3.0 3.0"				// 7
 				}
 				"11"
 				{
 					"var_type"				"FIELD_INTEGER"
-					"reduce_armor_amount"	"-10"
+					"reduce_armor_amount"	"0 0 0 -10 -10 -10 -10 -10"	// 4
 				}
 				"12"
 				{
 					"var_type"					"FIELD_FLOAT"
-					"reduce_armor_duration"		"5.0"				// Upgraded from 0 - x,2
+					"reduce_armor_duration"		"7.0"				
 				}
 			}
 			

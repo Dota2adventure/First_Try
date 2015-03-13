@@ -1,4 +1,4 @@
-"Bull_Rush00"
+"Bull_Rush"
 	{
 		// General
 		//-------------------------------------------------------------------------------------------------------------
@@ -12,8 +12,9 @@
 		"AbilityTextureName"			"spirit_breaker_charge_of_darkness"
 
 		"AbilityType"           		"DOTA_ABILITY_TYPE_BASIC"
-    		"MaxLevel"            		   	"1"
-    		"RequiredLevel"       		   	"1"
+    	"MaxLevel"            		   	"8"
+    	"RequiredLevel"       		   	"1"
+    	"LevelsBetweenUpgrades"  		"2"
 
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
@@ -35,12 +36,12 @@
 			"01"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"width"				"150"
+				"width"				"150 150 150 150 400 400 400 400"				// 5
 			}
 			"02"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"stun_duration"		"0"
+				"stun_duration"		"0 0 0 0 0 3.5 3.5 3.5"					// 6
 			}
 			"03"
 			{
@@ -50,7 +51,7 @@
 			"04"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"tooltip_range"		"600"
+				"tooltip_range"		"600 1200 1200 1200 1200 1200 1200 1200"				// 2
 			}
 			"05"
 			{
@@ -60,7 +61,7 @@
 			"06"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"buff_duration"		"0.0"
+				"buff_duration"		"0 0 0 0 0 0 0 3.0"				// 8
 			}
 			"07"
 			{
@@ -70,27 +71,27 @@
 			"08"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"slow_debuff_speed"	"-40"
+				"slow_debuff_speed"	"0 0 -40 -40 -40 -40 -40 -40"	// 3
 			}
 			"09"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"slow_buff_duration"		"0.0"
+				"slow_buff_duration"		"6.0"				
 			}
 			"10"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"str_damage"				"0.0"
+				"str_damage"				"0 0 0 0 0 0 3.0 3.0"				// 7
 			}
 			"11"
 			{
 				"var_type"				"FIELD_INTEGER"
-				"reduce_armor_amount"	"-10"
+				"reduce_armor_amount"	"0 0 0 -10 -10 -10 -10 -10"	// 4
 			}
 			"12"
 			{
 				"var_type"					"FIELD_FLOAT"
-				"reduce_armor_duration"		"0.0"
+				"reduce_armor_duration"		"7.0"				
 			}
 		}
 		
