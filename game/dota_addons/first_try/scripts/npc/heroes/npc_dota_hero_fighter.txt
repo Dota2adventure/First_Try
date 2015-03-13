@@ -7,7 +7,7 @@
 	// Abilities
 	//-------------------------------------------------------------------------------------------------------------		
 	"AbilityLayout" 		"4"	
-	"Ability1"				"Bull_Rush44" 
+	"Ability1"				"Bull_Rush00" 
 	"Ability2"				"advanced_empty2"  // Cleave
 	"Ability3"				"advanced_empty3"  // Equipment_Training
 	"Ability4"				"advanced_empty4"  // Power_Attack
@@ -48,8 +48,8 @@
 
 	// Starting Health and Mana
 	//-------------------------------------------------------------------------------------------------------------
-	"StatusHealth"				"500"									// Base health.
-	"StatusHealthRegen"			"0.1"									// Health regeneration rate.
+	"StatusHealth"				"0"										// Base health.
+	"StatusHealthRegen"			"0.0"									// Health regeneration rate.
 	"StatusMana"				"0"										// Base mana.
 	"StatusManaRegen"			"0.0"									// Mana regeneration rate.
 

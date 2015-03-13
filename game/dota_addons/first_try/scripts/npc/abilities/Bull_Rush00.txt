@@ -1,0 +1,266 @@
+"Bull_Rush00"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"FightRecapLevel"				"1"
+		"AbilityTextureName"			"spirit_breaker_charge_of_darkness"
+
+		"AbilityType"           		"DOTA_ABILITY_TYPE_BASIC"
+    		"MaxLevel"            		   	"1"
+    		"RequiredLevel"       		   	"1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"%tooltip_range"
+		"AbilityCastPoint"				"0.0"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"11.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"						
+		
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"width"				"150"
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"stun_duration"		"0"
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"anim_time"			"0.52"
+			}
+			"04"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"tooltip_range"		"600"
+			}
+			"05"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"speed"				"1500"
+			}
+			"06"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"buff_duration"		"0.0"
+			}
+			"07"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"buff_speed"		"100"
+			}
+			"08"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"slow_debuff_speed"	"-40"
+			}
+			"09"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"slow_buff_duration"		"0.0"
+			}
+			"10"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"str_damage"				"0.0"
+			}
+			"11"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"reduce_armor_amount"	"-10"
+			}
+			"12"
+			{
+				"var_type"					"FIELD_FLOAT"
+				"reduce_armor_duration"		"0.0"
+			}
+		}
+		
+		// Data driven
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"				"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
+			"particle"				"particles/generic_gameplay/generic_stunned.vpcf"
+			"particle"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_dust.vpcf"
+		}
+		
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{
+				"MoveSpeed"					"%speed"
+				"StartRadius"				"%width"
+				"EndRadius"					"%width"
+				"TargetTeams"				"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"				"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+				"HasFrontalCone"			"0"
+			}
+			
+			"ApplyModifier"
+			{
+				"ModifierName"				"modifier_bull_rush"
+				"Target"					"CASTER"
+			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"				"modifier_buff"
+				"Target"					"CASTER"
+			}
+			
+			"FireSound"
+			{
+				"EffectName"				"Hero_Sven.WarCry"
+				"Target"					"CASTER"
+			}
+
+			"RunScript"
+			{
+				"ScriptFile"		"scripts/vscripts/heroes.lua"
+				"Function"			"bullrush"
+				"Target"			"POINT"
+			}
+		}
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"					"true"
+			
+			"ApplyModifier"
+			{
+				"ModifierName"				"modifier_bull_rush_stun"
+				"Target"					"TARGET"
+			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"				"modifier_bull_rush_slow"
+				"Target"					"TARGET"
+			}
+
+			"ApplyModifier"
+			{
+				"ModifierName"				"modifier_bull_rush_armor"
+				"Target"					"TARGET"
+			}
+			
+			"Knockback"
+			{
+				"Target"			"TARGET"
+				"Duration"			"%anim_time"
+				"Distance"			"200"
+				"Height"			"25"
+			}
+			
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/heroes.lua"
+				"Function"		"StrToDamage"
+				"Target"		"TARGET"
+			}
+		}
+		
+		"OnProjectileFinish"
+		{				
+			"RemoveModifier"
+			{
+				"ModifierName"		"modifier_bull_rush"
+				"Target"			"CASTER"
+			}
+		}
+		
+		"Modifiers"
+		{
+			"modifier_bull_rush"
+			{
+				"IsHidden"					"1"
+			
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"EffectName"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_dust.vpcf"
+						"EffectAttachType"			"follow_origin"
+						"Target"					"TARGET"
+					}					
+				}
+
+			}
+		
+			"modifier_bull_rush_stun"
+			{
+				"IsDebuff"					"1"
+				"Duration"					"%stun_duration"
+				"OverrideAnimation"			"ACT_DOTA_DISABLED"
+				
+				"EffectName"				"particles/generic_gameplay/generic_stunned.vpcf"
+				"EffectAttachType"			"follow_overhead"
+				
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+
+			"modifier_bull_rush_slow"
+			{
+				"IsDebuff"					"1"
+				"Duration"					"%slow_buff_duration"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%slow_debuff_speed"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%slow_debuff_speed"
+				}
+			}
+
+			"modifier_bull_rush_armor"
+			{
+				"IsDebuff"					"1"
+				"Duration"					"%reduce_armor_duration"
+				
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%reduce_armor_amount"
+				}
+			}
+
+			"modifier_buff"
+			{
+				"IsBuff"	"1"
+				"Duration"	"%buff_duration"
+
+				"EffectName"		"particles/units/heroes/hero_sven/sven_warcry_buff.vpcf"
+				"EffectAttachType"	"follow_origin"
+
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%buff_speed"
+				}
+			}
+		}
+	}

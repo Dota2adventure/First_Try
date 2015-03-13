@@ -43,6 +43,8 @@ USE_CUSTOM_HERO_LEVELS = true           -- Should we allow heroes to have custom
 MAX_LEVEL = 50                          -- What level should we let heroes get to?
 USE_CUSTOM_XP_VALUES = true             -- Should we use custom XP values to level up heroes, or the default Dota numbers?
 
+NO_SHOP_OUTSIDE = true 					-- Don't allow shopping outside the range of shops
+
 -- Fill this table up with the required XP per level if you want to change it
 XP_PER_LEVEL_TABLE = {}
 for i=1,MAX_LEVEL do
@@ -193,6 +195,10 @@ function GameMode:CaptureGameMode()
 		mode:SetFogOfWarDisabled(DISABLE_FOG_OF_WAR_ENTIRELY)
 		mode:SetGoldSoundDisabled( DISABLE_GOLD_SOUNDS )
 		mode:SetRemoveIllusionsOnDeath( REMOVE_ILLUSIONS_ON_DEATH )
+
+		if NO_SHOP_OUTSIDE then
+			mode:GetStashPurchasingDisabled()
+		end
 
 		self:OnFirstPlayerLoaded()
 	end
