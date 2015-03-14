@@ -88,6 +88,14 @@
 	}
 	"Bull_Rush"
 		{
+			// 2: Range
+			// 3: Enemies atk and move slowed
+			// 4: Enemies armor reduced
+			// 5: Width Increased
+			// 6: Enemies Stunned
+			// 7: Damage
+			// 8: Increase own atk speed
+	
 			// General
 			//-------------------------------------------------------------------------------------------------------------
 			"BaseClass"						"ability_datadriven"
@@ -106,7 +114,7 @@
 	
 			// Casting
 			//-------------------------------------------------------------------------------------------------------------
-			"AbilityCastRange"				"%tooltip_range"
+			"AbilityCastRange"				"600 1200 1200 1200 1200 1200 1200 1200" // 2
 			"AbilityCastPoint"				"0.0"
 			
 			// Time		
@@ -139,7 +147,7 @@
 				"04"
 				{
 					"var_type"			"FIELD_INTEGER"
-					"tooltip_range"		"600 1200 1200 1200 1200 1200 1200 1200"				// 2
+					"tooltip_range"		"%AbilityCastRange"				
 				}
 				"05"
 				{
@@ -190,6 +198,7 @@
 				"soundfile"				"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
 				"particle"				"particles/generic_gameplay/generic_stunned.vpcf"
 				"particle"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_dust.vpcf"
+				"particle"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_wave.vpcf"
 			}
 			
 			"OnSpellStart"
@@ -295,7 +304,13 @@
 							"EffectName"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_dust.vpcf"
 							"EffectAttachType"			"follow_origin"
 							"Target"					"TARGET"
-						}					
+						}	
+						"AttachEffect"
+						{
+							"EffectName"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_wave.vpcf"
+							"EffectAttachType"			"follow_origin"
+							"Target"					"TARGET"
+						}									
 					}
 	
 				}
@@ -353,4 +368,135 @@
 				}
 			}
 		}
+	"Cleave"
+	{
+		// 2: 
+		// 3: 
+		// 4: 
+		// 5: 2xRadius
+		// 6: 
+		// 7: 2xDamage
+		// 8: Cooldown halved
+	
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_ATTACK"
+		"SpellImmunityType"				"SPELL_IMMUNITY_ENEMIES_YES"
+		"AbilityTextureName"			"sven_great_cleave"
+	
+		"AbilityType"           		"DOTA_ABILITY_TYPE_BASIC"
+	    "MaxLevel"            		   	"8"
+	    "RequiredLevel"       		   	"1"
+	    "LevelsBetweenUpgrades"  		"2"
+	
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"15.0"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"particle"			"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+		}
+				
+		// Special
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cleave_radius"			"200"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"cleave_damage"			"75"
+			}
+		}
+	
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"next_auto_attack"
+				"Target" 		"CASTER"
+			}		
+	
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/heroes.lua"
+				"Function"		"CleaveToggle"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"next_auto_attack"
+			{			
+				"IsHidden"	"1"
+	
+				"OnAttackStart"
+				{
+					"ApplyModifier"
+					{
+						"ModifierName"	"cleave_buff"
+						"Target" 		"CASTER"					
+					}
+				}
+	
+				"OnDealDamage"			
+				{
+					"RemoveModifier"
+					{
+						"ModifierName"	"cleave_buff"
+						"Target" 		"CASTER"
+					}
+	
+					"RemoveModifier"
+					{
+						"ModifierName"	"next_auto_attack"
+						"Target" 		"CASTER"
+					}
+	
+					"RunScript"
+					{
+					"ScriptFile"	"scripts/vscripts/heroes.lua"
+					"Function"		"CleaveToggle"
+					}
+				}
+			}
+	
+	
+			"cleave_buff"
+			{			
+				"IsHidden"	"1"
+	
+				"OnAttackLanded"
+				{
+					"CleaveAttack"
+					{
+						"CleavePercent"		"%cleave_damage"
+						"CleaveRadius"		"%cleave_radius"
+						"CleaveEffect"		"particles/units/heroes/hero_sven/sven_spell_great_cleave.vpcf"
+					}
+				}
+			}
+		}
+	
+	
+	}
+	"Cleave_passive"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		//"ID"							"5343"														// unique ID number for this ability.  Do not change this once established or it will invalidate collected stats.
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE | DOTA_ABILITY_BEHAVIOR_NOT_LEARNABLE"
+		"MaxLevel"						"8"
+		"BaseClass" 					"ability_datadriven"
+		"AbilityTextureName"            "rubick_empty1"
+	}
 }

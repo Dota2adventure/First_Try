@@ -10,10 +10,11 @@
 		//-------------------------------------------------------------------------------------------------------------		
 		"AbilityLayout" 		"4"	
 		"Ability1"				"Bull_Rush" 
-		"Ability2"				"advanced_empty2"  // Cleave
+		"Ability2"				"Cleave"
 		"Ability3"				"advanced_empty3"  // Equipment_Training
 		"Ability4"				"advanced_empty4"  // Power_Attack
-		"Ability5"				"attribute_bonus"
+		"Ability5"				"Cleave_passive"
+		"Ability6"				"attribute_bonus"
 	
 		// Defense
 		//-------------------------------------------------------------------------------------------------------------

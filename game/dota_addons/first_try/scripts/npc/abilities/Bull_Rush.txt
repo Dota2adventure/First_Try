@@ -1,5 +1,13 @@
 "Bull_Rush"
 	{
+		// 2: Range
+		// 3: Enemies atk and move slowed
+		// 4: Enemies armor reduced
+		// 5: Width Increased
+		// 6: Enemies Stunned
+		// 7: Damage
+		// 8: Increase own atk speed
+
 		// General
 		//-------------------------------------------------------------------------------------------------------------
 		"BaseClass"						"ability_datadriven"
@@ -18,7 +26,7 @@
 
 		// Casting
 		//-------------------------------------------------------------------------------------------------------------
-		"AbilityCastRange"				"%tooltip_range"
+		"AbilityCastRange"				"600 1200 1200 1200 1200 1200 1200 1200" // 2
 		"AbilityCastPoint"				"0.0"
 		
 		// Time		
@@ -51,7 +59,7 @@
 			"04"
 			{
 				"var_type"			"FIELD_INTEGER"
-				"tooltip_range"		"600 1200 1200 1200 1200 1200 1200 1200"				// 2
+				"tooltip_range"		"%AbilityCastRange"				
 			}
 			"05"
 			{
@@ -102,6 +110,7 @@
 			"soundfile"				"soundevents/game_sounds_heroes/game_sounds_sven.vsndevts"
 			"particle"				"particles/generic_gameplay/generic_stunned.vpcf"
 			"particle"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_dust.vpcf"
+			"particle"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_wave.vpcf"
 		}
 		
 		"OnSpellStart"
@@ -207,7 +216,13 @@
 						"EffectName"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_dust.vpcf"
 						"EffectAttachType"			"follow_origin"
 						"Target"					"TARGET"
-					}					
+					}	
+					"AttachEffect"
+					{
+						"EffectName"				"particles/units/heroes/hero_spirit_breaker/spirit_breaker_charge_wave.vpcf"
+						"EffectAttachType"			"follow_origin"
+						"Target"					"TARGET"
+					}									
 				}
 
 			}
