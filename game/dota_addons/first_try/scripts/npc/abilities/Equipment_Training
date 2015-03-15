@@ -1,0 +1,33 @@
+"Equipment_Training"
+	{
+		// 1: 1.5 Attack Damage
+		// 2: 1.5 Armor
+		// 3: 1.5 Move Speed
+		// 4: 1.5 Max HP
+		// 5: 1.5 HP Regen 
+		// 6: 1.5 Strength
+		// 7: 1.5 Attack Speed
+		// 8: Increased to 2
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"Equipment_Training"
+
+		"AbilityType"           		"DOTA_ABILITY_TYPE_BASIC"
+    	"MaxLevel"            		   	"8"
+    	"RequiredLevel"       		   	"1"
+    	"LevelsBetweenUpgrades"  		"2"
+
+    	"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"multiplier"		"1.5 1.5 1.5 1.5 1.5 1.5 1.5 2"		
+			}
+		}
+					
+	}
+		
