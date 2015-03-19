@@ -1,0 +1,33 @@
+"Combat_Expertise"
+	{
+		// 1: Attack Damage
+		// 2: Armor
+		// 3: Move Speed
+		// 4: Max HP
+		// 5: HP Regen 
+		// 6: Evasion
+		// 7: Attack Speed
+		// 8: Increased max stacks
+
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"axe_counter_helix"
+
+		"AbilityType"           		"DOTA_ABILITY_TYPE_BASIC"
+    	"MaxLevel"            		   	"7"
+    	"RequiredLevel"       		   	"1"
+    	"LevelsBetweenUpgrades"  		"2"
+
+    	"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"max_stacks"		"5 5 5 5 5 5 10"		
+			}
+		}
+					
+	}
+		
