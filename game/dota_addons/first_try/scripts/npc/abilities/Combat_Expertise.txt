@@ -25,9 +25,69 @@
 			"01"
 			{
 				"var_type"			"FIELD_FLOAT"
-				"max_stacks"		"5 5 5 5 5 5 10"		
+				"max_stacks"		"10 10 10 10 10 10 15"		
 			}
 		}
+
+			"Modifiers"
+	{
+		"modifier_combat_expertise"
+		{
+			"Passive"	"1"
+			"IsHidden"	"1"
+
+			"OnAttacked"
+			{
+				"ApplyModifier"
+				{
+					"Target"			"CASTER"
+					"ModifierName"		"modifier_combat_expertise_buff"
+				}
+			}
+		}
+
+
+		"modifier_combat_expertise_stacks"
+		{
+			"IsBuff"			"1"
+			"Duration"			"2"
+		}
+
+		"modifier_combat_expertise_buff"
+		{
+			"IsHidden"			"1"
+			"Duration"			"2"
+			"Attributes"    	"MODIFIER_ATTRIBUTE_MULTIPLE" 
+
+			"OnCreated"
+			{
+				"RunScript"
+				{
+					"ScriptFile"		"scripts/vscripts/heroes.lua"
+					"Function"			"ApplyStack"
+					"stack_modifier"	"modifier_combat_expertise_stacks"
+					"buff_modifier"		"modifier_combat_expertise_buff"
+				}
+			}
+
+			"OnDestroy"
+			{
+				"RunScript"
+				{
+					"ScriptFile"		"scripts/vscripts/heroes.lua"
+					"Function"			"RemoveStack"
+					"stack_modifier"	"modifier_combat_expertise_stacks"
+					"buff_modifier"		"modifier_combat_expertise_buff"
+				}
+			}
+
+			"Properties"
+			{
+				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%move_speed_pct"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed"
+			}
+		}
+	}
 					
 	}
 		

@@ -179,3 +179,35 @@ function ReflectDamage( keys )
 	print(dmg)]]
 
 end
+
+
+function ApplyStack( keys )
+	local caster = keys.caster
+	local ability = keys.ability
+	local stack_modifier = keys.stack_modifier
+	local stack_count = caster:GetModifierStackCount(stack_modifier, ability)
+	local buff_modifier = keys.buff_modifer
+	local max_stacks = ability:GetLevelSpecialValueFor("max_stacks", (ability:GetLevel() -1)) 
+
+	if stack_count < max_stacks then		
+		ability:ApplyDataDrivenModifier(caster, caster, stack_modifier, {})
+		caster:SetModifierStackCount(stack_modifier, ability, stack_count + 1)
+	else
+		caster:RemoveModifierByName(buff_modifier)
+		caster:SetModifierStackCount(stack_modifier, ability, stack_count)
+	end
+
+end
+
+function RemoveStack( keys )
+	local caster = keys.caster
+	local ability = keys.ability
+	local stack_modifier = keys.stack_modifier
+	local stack_count = caster:GetModifierStackCount(stack_modifier, ability)
+
+	if stack_count <= 1 then
+		caster:RemoveModifierByName(stack_modifier)
+	else
+		caster:SetModifierStackCount(stack_modifier, ability, stack_count - 1)
+	end
+end
