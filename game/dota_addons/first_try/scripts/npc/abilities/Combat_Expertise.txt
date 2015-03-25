@@ -2,12 +2,11 @@
 	{
 		// 1: Attack Damage
 		// 2: Armor
-		// 3: Move Speed
-		// 4: Max HP
-		// 5: HP Regen 
-		// 6: Evasion
-		// 7: Attack Speed
-		// 8: Increased max stacks
+		// 3: Max HP
+		// 4: HP Regen 
+		// 5: Evasion
+		// 6: Attack Speed
+		// 7: Increased max stacks
 
 		// General
 		//-------------------------------------------------------------------------------------------------------------
@@ -24,8 +23,33 @@
 		{
 			"01"
 			{
-				"var_type"			"FIELD_FLOAT"
+				"var_type"			"FIELD_INTEGER"
 				"max_stacks"		"10 10 10 10 10 10 15"		
+			}
+			"02"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"bonus_armor"		"0 1 1 1 1 1 1"		
+			}
+			"03"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"bonus_HP"			"0 0 5 5 5 5 5"		
+			}
+			"04"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"bonus_HPregen"		"0 0 0 0.5 0.5 0.5 0.5"		
+			}
+			"05"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"bonus_evasion"		"0 0 0 0 1 1 1"		
+			}
+			"06"
+			{
+				"var_type"			"FIELD_FLOAT"
+				"bonus_atkspeed"	"0 0 0 0 0 1 1"		
 			}
 		}
 
@@ -83,8 +107,12 @@
 
 			"Properties"
 			{
-				"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%move_speed_pct"
-				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed"
+				"MODIFIER_PROPERTY_BASEATTACK_BONUSDAMAGE"		"1"
+				"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"		"%bonus_armor"
+				"MODIFIER_PROPERTY_HEALTH_BONUS"				"%bonus_HP"
+				"MODIFIER_PROPERTY_HEALTH_REGEN_PERCENTAGE"		"%bonus_HPregen"
+				"MODIFIER_PROPERTY_EVASION_CONSTANT"			"%bonus_evasion"
+				"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%bonus_atkspeed"
 			}
 		}
 	}
